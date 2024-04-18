@@ -149,6 +149,7 @@ message Nexus {
   uint32 rebuilds = 7;         // total number of rebuild tasks
   NvmeAnaState ana_state = 8;  // Nexus ANA state.
   repeated string allowed_hosts = 9; // host (nqn's) which are allowed to connect to the target
+  bool encrypted = 10; // HACK: if the volume is encrypted, all children of this nexus must be encrypted?
 }
 
 message CreateNexusResponse {

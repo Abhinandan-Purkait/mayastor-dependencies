@@ -41,6 +41,20 @@ message CreatePoolRequest {
   // must be multiple of 1MiB, else default cluster size i.e 4MiB will be considered. Minimum
   // cluster size can be input as 1048576 (1024 * 1024) bytes (1MiB)
   optional uint32 cluster_size = 5;
+  // HACK: Encryption params, if none pool will be created without encryption.
+  optional Encryption encryption = 6;
+}
+
+// HACK: structure for encryption.
+message Encryption {
+  // Encryption algorithm.
+  string cipher = 1;
+  // Encryption key one.
+  string hex_key1 = 2;
+  // Encyrption key two.
+  string hex_key2 = 3;
+  // Key name.
+  string key_name = 4;
 }
 
 // Create pool arguments.
@@ -70,6 +84,7 @@ message Pool {
   PoolType pooltype = 7;      // type of the pool
   uint64 committed = 8;       // committed size of all pool replicas (sum of capacities of all replicas)
   uint32 cluster_size = 9;    // blobstor cluster size set (in bytes) during pool creation
+  bool encrypted = 10;        // HACK: True is the pool is encrypted.
 }
 
 // Destroy pool arguments.
